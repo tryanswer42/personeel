@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+
+<!--  -->
+<head th:replace="fragments::head(title='Opslag')"></head>
+<!--  -->
+<body>
+<h1>Opslag voor <span th:text="${werknemer.getVoornaam()}+' '+${werknemer.getFamilienaam()}"></span></h1>
+<div> Huidig salaris</div>
+<div class="inBold" th:text="${werknemer.getSalaris()}"></div>
+<br>
+<form th:object="${opslagForm}" th:action="@{/opslag/{id}(id=${werknemer.getId()})}" method="post">
+
+    <div>Bedrag:</div>
+    <input th:field="*{opslag}" type="number" min="1" step=".01" required autofocus placeholder="Nieuw Opslag Min:1">
+    <span th:if="${#fields.hasErrors('opslag')}" th:errors="*{opslag}">opslag Error></span>
+    <button>Opslag</button>
+</form>
+
+</body>
+</html>

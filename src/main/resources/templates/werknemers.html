@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+
+<!--  -->
+<head th:replace="fragments::head(title='Werknemershiërarchie')"></head>
+<!--  -->
+<body>
+
+<h1 th:text="${werknemer.getVoornaam()}+' '+${werknemer.getFamilienaam()}"></h1>
+<p></p>
+
+
+<dl th:object="${werknemer}">
+    <dt>Voornaam</dt>
+    <dd th:text="*{getVoornaam()}"></dd>
+    <br>
+    <dt>Familienaam</dt>
+    <dd th:text="*{getFamilienaam()}"></dd>
+    <br>
+    <dt>Email adres</dt>
+    <dd th:text="*{getEmail()}"></dd>
+    <br>
+    <dt>Salaris</dt>
+    <dd th:text="*{getSalaris()}"></dd>
+    <br>
+    <dt>Jobtitel</dt>
+
+    <dd th:text="*{getJobtitel().getNaam()}"></dd>
+
+    <br>
+    <dt>Geboorte</dt>
+    <dd th:text="*{#dates.format(getGeboorte(),'dd-MM-yy')}"></dd>
+    <br>
+    <div th:if="*{getChef()!= null }">
+        <dt>Chef</dt>
+        <dd><a th:href="@{'/werknemers/'+${werknemer.getChef().getId()}}"
+               th:text="${werknemer.getChef().getVoornaam()}+' '+${werknemer.getChef().getFamilienaam()}"></a>
+        </dd>
+    </div>
+    <br>
+    <dt>Ondergeschikten</dt>
+
+
+    <dd>
+<span th:each="ondergeschikt:${ondergeschikten}">
+    <a th:href="@{'/werknemers/'+${ondergeschikt.getId()}}"
+       th:text="${ondergeschikt.getVoornaam()}+' '+${ondergeschikt.getFamilienaam()}"></a> <br></span>
+
+        <br>
+
+    </dd>
+    <dd>Foto</dd>
+    <img th:src="@{/images/{id}(id=${werknemer.getId()}+'.jpg')}" alt="personeel"></h1>
+    <br>
+
+</dl>
+
+<a th:href="@{/opslag/{id}(id=${werknemer.getId()})}"> <span>Opslag</span></a>
+<a th:href="@{/rijksregisternummer/{id}(id=${werknemer.getId()})}"><span>Rijksregisternummer</span></a>
+<br>
+
+
+</body>
+</html>

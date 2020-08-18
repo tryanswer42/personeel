@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+
+<!--  -->
+<head th:replace="fragments::head(title='Rijksregisternummer')"></head>
+<!--  -->
+<body>
+<h1>Rijksregisternummer van <span th:text="${werknemer.getVoornaam()}+' '+${werknemer.getFamilienaam()}"></span></h1>
+
+<br>
+<form th:object="${rijksregisternummerForm}" th:action="@{/rijksregisternummer/{id}(id=${werknemer.getId()})}"
+      method="post">
+
+    <div>Rijksregisternummer:</div>
+    <input th:field="*{rijksregisternummer}" type="number" required autofocus
+           th:placeholder="${werknemer.rijksregisternr}">
+    <span th:if="${#fields.hasErrors('rijksregisternummer')}" th:errors="*{rijksregisternummer}">rijksregisternummer Error></span>
+    <button>Opslaan</button>
+</form>
+
+</body>
+</html>

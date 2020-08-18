@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<!--  -->
+<head th:replace="fragments::head(title='Menu')"></head>
+<!--  -->
+<body>
+<h1>Menu</h1>
+<ul>
+
+    <li><a th:href="@{'/werknemers/'+${bigChefId}}">Werknemershiërarchie</a></li>
+    <li><a th:href="@{/jobtitels}">Jobtitels</a></li>
+</ul>
+<form method="post" th:action="@{/logout}" sec:authorize="isAuthenticated()">
+    <button><span sec:authentication="name"></span> uitloggen</button>
+</form>
+</body>
+</html>
