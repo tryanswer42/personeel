@@ -48,7 +48,7 @@ public class DefaultWerknemerService implements WerknemerService {
     @Override
     @Transactional(readOnly = false, isolation = Isolation.READ_COMMITTED)
     public void opslagUpdaten(Werknemer werknemer, BigDecimal nieuwOpslag) {
-        werknemer.setSalaris(nieuwOpslag);
+        werknemer.setSalaris(werknemer.getSalaris().add(nieuwOpslag));
         werknemerRepository.save(werknemer);
 
     }
